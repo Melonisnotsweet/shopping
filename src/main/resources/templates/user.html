@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>我的个人资料</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layui/css/admin.css" media="all">
+    <link rel="stylesheet" href="/layui/css/login.css" media="all">
+</head>
+<body style="width: 75%;margin:0 auto">
+<form class="layui-form" th:action="@{/user/user}" method="post">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <p><h1>&nbsp;&nbsp;用户个人资料</h1></p>
+
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-form layui-card-body layuiadmin-card-body-auto">
+                <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+                    <div class="layadmin-user-login-main">
+                        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+                            <div class="layui-form-item">
+                                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+                                <input type="text" name="name" id="LAY-user-login-username" placeholder="昵称" th:value="${users.name}" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-nickname"></label>
+                                <input type="text" name="ID" id="LAY-user-login-nickname"  lay-verify="phone|email" placeholder="账号(请设置为您的邮箱或手机号)"
+                                       th:value="${users.ID}" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone" for="LAY-user-login-cellphone"></label>
+                                <input type="text" name="phone" id="LAY-user-login-cellphone" lay-verify="phone" placeholder="手机"
+                                       th:value="${users.phone}" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layadmin-user-login-icon layui-icon layui-icon-home" for="LAY-user-login-cellphone"></label>
+                                <input type="text" name="address" id="LAY-user-login-home" lay-verify="required" placeholder="地址"
+                                       th:value="${users.address}" class="layui-input">
+                            </div>
+                            <p th:if="${users.user_type!=1}">您尚未开通店铺功能   <a th:href="@{/store/toAddStore}">点击开通</a></p><br/>
+
+                            <div class="layui-form-item">
+                                <button class="layui-btn layui-btn-fluid" type="submit">修改</button>
+                            </div>
+                            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                                <a href="reg.html" th:href="@{/user/register}" class="layadmin-user-jump-change layadmin-link">注册新账户</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</form>
+</body>
+</html>

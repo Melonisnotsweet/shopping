@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pqz.shopping.dao.StoreDao" >
+    <select id="findStore" parameterType="String" resultType="cn.pqz.shopping.po.Store">
+      select * from store where user_ID='${user_ID}'
+   </select>
+    <insert id="addStore" parameterType="cn.pqz.shopping.po.Store">
+        insert into store(store_name,user_ID,store_info) values ('${store_name}','${user_ID}','${store_info}')
+    </insert>
+
+
+</mapper>

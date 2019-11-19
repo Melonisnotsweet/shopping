@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pqz.shopping.dao.GoodsDao" >
+    <sql id="selectGoodsListWhere">
+        <where>
+            <if test="good_name!=null">
+                good_name like '%${good_name}%'
+            </if>
+            <if test="store_ID != null" >
+                and b.store_name like '%${store_ID}%'
+            </if>
+            <if test="good_type != null" >
+                and good_type = #{good_type}
+            </if>
+        </where>
+    </sql>
+ <select id="findGoods" parameterType="cn.pqz.shopping.po.Goods" resultType="cn.pqz.shopping.po.Goods">
+    SELECT id,good_name,good_type,b.store_name store_ID,price FROM goods a
+    LEFT JOIN(SELECT user_ID,store_name FROM store)b on b.user_ID=a.store_ID
+      <include refid="selectGoodsListWhere"/>
+ </select>
+    <select id="selectGoods" parameterType="String" resultType="cn.pqz.shopping.po.Goods">
+        select * from goods where store_ID=#{store_ID};
+    </select>
+    <insert id="addGoods" parameterType="cn.pqz.shopping.po.Goods">
+        insert into goods(good_name,good_type,store_ID,price)
+        values ('${good_name}','${good_type}','${store_ID}',${price})
+    </insert>
+    <delete id="deleteGood" parameterType="Integer">
+        delete from goods where id=#{id}
+    </delete>
+    <select id="findScGoods" parameterType="String" resultType="cn.pqz.shopping.po.Goods">
+    SELECT a.id,good_name,good_type,b.store_name store_ID,price FROM goods a
+    LEFT JOIN(SELECT user_ID,store_name FROM store)b on b.user_ID=a.store_ID,
+    shopping_card c WHERE a.id=c.good_id AND c.user_id='${user_id}'
+    </select>
+    <select id="findColGoods" parameterType="String" resultType="cn.pqz.shopping.po.Goods">
+    SELECT a.id,good_name,good_type,b.store_name store_ID,price FROM goods a
+    LEFT JOIN(SELECT user_ID,store_name FROM store)b on b.user_ID=a.store_ID,
+    collection c WHERE a.id=c.good_id AND c.user_id='${user_id}'
+    </select>
+</mapper>

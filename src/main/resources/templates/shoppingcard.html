@@ -1,0 +1,64 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>商品列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css"th:href="@{/layui/css/layuigood.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{/layui/css/admin.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{/layui/css/template.css}"media="all">
+</head>
+<body class="layui-body" style="width: 75%;margin:0 auto" >
+<div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-card">
+                    <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                        <p><h1>&nbsp;&nbsp;购物车</h1></p>
+                    </div>
+                </div>
+                <a class="layui-btn" th:href="@{/shopping/toOrder}">结算</a>
+            </div>
+        </div>
+</div>
+<div class="layui-fluid layadmin-cmdlist-fluid">
+    <div class="layui-row layui-col-space30">
+        <div class="layui-col-md2 layui-col-sm4" th:each="good:${goods}">
+            <div class="cmdlist-container">
+                <a href="javascript:;">
+                    <img src="/layui/img/tongyong.jpg">
+                </a>
+                <a href="javascript:;">
+                    <div class="cmdlist-text">
+                        <p class="info">[[${good.good_name}]]</p>
+                        <p class="info">店铺:[[${good.store_ID}]]</p>
+                        <div class="price">
+                            <b>￥[[${good.price}]]</b>
+                            <span class="flow">
+                                <i class="layui-icon layui-icon-rate"></i>
+                            </span>
+                            <input type="hidden" name="good_id" th:value="${good.id}" />
+                            <a class="layui-btn" th:href="@{/shopping/deleteGoods}+${good.id}">删除</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../layuiadmin/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render('radio');
+    });
+</script>
+</body>
+</html>

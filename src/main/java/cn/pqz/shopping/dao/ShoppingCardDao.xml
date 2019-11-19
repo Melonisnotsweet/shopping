@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pqz.shopping.dao.ShoppingCardDao" >
+    <insert id="addGoodsToSc" parameterType="cn.pqz.shopping.po.ShoppingCard">
+        insert into shopping_card(good_id,user_id) values (${good_id},'${user_id}')
+    </insert>
+    <delete id="deleteGoods" parameterType="Integer">
+        delete from shopping_card where good_id=${good_id}
+    </delete>
+</mapper>

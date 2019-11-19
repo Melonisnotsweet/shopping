@@ -1,0 +1,93 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>商品列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css"th:href="@{/layui/css/layuigood.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{/layui/css/admin.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{/layui/css/template.css}"media="all">
+</head>
+<body class="layui-body" style="width: 75%;margin:0 auto" >
+<div class="layui-fluid">
+    <form class="layui-form" th:action="@{/goods/goodlist}">
+
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+
+            <div class="layui-form-item" >
+            <div class="layui-input-inline">
+                <label class="layui-form-label">商品名称：</label>
+                <div class="layui-input-block">
+                <input type="text" name="good_name" placeholder="请输入商品名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <label class="layui-form-label">店铺名称：</label>
+                <div class="layui-input-block">
+                <input type="text" name="store_ID"  placeholder="请输入店铺名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-input-inline" >
+                <label class="layui-form-label">分类：</label>
+                <div class="layui-input-block">
+                <select name="good_type">
+                    <option value="">--请选择分类--</option>
+                    <option th:each="goodType:${goodsType}" th:value="${goodType.id}"
+                            th:text="${goodType.type}">--请选择--</option>
+                </select>
+                </div>
+            </div>
+            <button class="layui-btn" type="submit">查询</button>
+        </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="layui-fluid layadmin-cmdlist-fluid">
+    <div class="layui-row layui-col-space30">
+        <div class="layui-col-md2 layui-col-sm4" th:each="good:${goods}">
+            <div class="cmdlist-container">
+                <a href="javascript:;">
+                    <img src="/layui/img/tongyong.jpg" style="height: 120px">
+                </a>
+                <a href="javascript:;">
+                    <div class="cmdlist-text">
+                        <p class="info">[[${good.good_name}]]</p>
+                        <p class="info">店铺:[[${good.store_ID}]]</p>
+                        <div class="price">
+                            <b>￥[[${good.price}]]</b>
+                            <span class="flow">
+                                <a href="" th:href="@{/collection/addGoodtoCol}+${good.id}">
+                                <i class="layui-icon layui-icon-rate"></i>
+                                </a>
+                            </span>
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="hidden" name="good_id" th:value="${good.id}"/>
+                            <a href="" th:href="@{/shopping/shoppingCard}+${good.id}">
+                                <i class="layui-icon layui-icon-cart-simple"></i>
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../layuiadmin/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render('radio');
+    });
+</script>
+</body>
+</html>

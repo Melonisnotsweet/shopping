@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>我的个人资料</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layui/css/layuigood.css" media="all">
+    <link rel="stylesheet" href="/layui/css/admin.css" media="all">
+    <link rel="stylesheet" href="/layui/css/login.css" media="all">
+</head>
+<body style="width: 75%;margin:0 auto">
+<form class="layui-form" th:action="@{/store/addGoods}" method="post">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <p><h1>&nbsp;&nbsp;请上架您的商品</h1></p>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-form layui-card-body layuiadmin-card-body-auto">
+                <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+                    <div class="layadmin-user-login-main">
+                        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline">
+                                <label class="layui-form-label">商品名称：</label>
+                                    <div class="layui-input-block">
+                                       <input type="text" name="good_name" placeholder="商品名称"  class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline">
+                                    <label class="layui-form-label">商品价格：</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="price" placeholder="商品价格"  class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-input-inline" >
+                                <label class="layui-form-label">分类：</label>
+                                <div class="layui-input-block">
+                                    <select name="good_type">
+                                        <option value="">--请选择分类--</option>
+                                        <option th:each="goodType:${goodsType}" th:value="${goodType.id}"
+                                                th:text="${goodType.type}">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="layui-form-item">
+                                <button class="layui-btn layui-btn-fluid" type="submit">上架</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</form>
+<script src="../../layuiadmin/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render('radio');
+    });
+</script>
+</body>
+</html>

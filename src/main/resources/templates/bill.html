@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>您的订单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css"th:href="@{/layui/css/layuigood.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" th:href="@{/layui/css/admin.css}" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/template.css" th:href="@{/layui/css/template.css}"media="all">
+</head>
+<body style="width: 75%;margin:0 auto">
+<form class="layui-form" method="post">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-card">
+                    <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                        <p><h1>&nbsp;&nbsp;我的账单</h1></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-fluid">
+        <div class="layui-card" th:each="bill:${bills}">
+            <div class="layui-form layui-card-body layuiadmin-card-body-auto">
+                <p><h1>以为您生成账单，您的消费总额度为[[${bill.price}]]￥</h1></p>
+                <br/>
+                <br/>
+                <p><h2>账单流水号:[[${bill.id}]]</h2></p>
+                <br/>
+                <a href="" class="layui-btn">立即付款</a>
+                <a th:href="@{/bill/deleteBill}+${bill.id}" class="layui-btn">取消</a>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="../../layuiadmin/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render('radio');
+    });
+</script>
+</body>
+</html>

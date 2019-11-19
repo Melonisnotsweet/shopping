@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.pqz.shopping.dao.OrderDao" >
+    <insert id="addOrder" parameterType="cn.pqz.shopping.po.Order">
+        insert into `order`(price,user_id) values (${price},'${user_id}')
+    </insert>
+    <select id="findOrder" parameterType="String" resultType="cn.pqz.shopping.po.Order">
+        select * from `order` where user_id=#{user_id}
+    </select>
+    <delete id="deleteOrder" parameterType="Integer">
+        delete from `order` where id=#{id}
+    </delete>
+    <update id="updateOrderType" parameterType="Integer">
+        update `order` set type=1 where id=#{id}
+    </update>
+</mapper>
